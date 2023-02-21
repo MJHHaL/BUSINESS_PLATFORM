@@ -9,11 +9,15 @@ class Section(models.Model):
 
 class Projects(models.Model):
     
-    projects_name = models.CharField(max_length=500)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    section = models.ForeignKey(Section, on_delete= models.CASCADE)
+    projects_name = models.CharField(max_length=500)
     description = models.TextField()
     rating =  models.FloatField()
-    date_at  = models.DateTimeField(auto_now_add=True)
+    created_at  = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to="images/", default="images/default.jpg")
+
+    
     def __str__(self) -> str:
         return f"{self.projects_name}"
 
