@@ -2,15 +2,20 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+
+class Section(models.Model):
+    section_name = models.CharField(max_length=30)
+    
+
 class Projects(models.Model):
     
-    name_projects = models.CharField(max_length=500)
+    projects_name = models.CharField(max_length=500)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.TextField()
     rating =  models.FloatField()
     date_at  = models.DateTimeField(auto_now_add=True)
     def __str__(self) -> str:
-        return f"{self.name_projects}"
+        return f"{self.projects_name}"
 
 class Comments(models.Model):
 
@@ -20,4 +25,3 @@ class Comments(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-    
