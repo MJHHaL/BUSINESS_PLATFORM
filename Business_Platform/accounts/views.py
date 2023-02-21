@@ -30,7 +30,7 @@ def login_user(request : HttpRequest):
         if user is not None:
             #login user
             login(request, user)
-            return redirect("url_main:Home")
+            return redirect("url_main:home")
         else:
             loggin_msg = "Please Use correct Credentials"
     return render(request, "accounts/login.html", {"msg" : loggin_msg})
@@ -40,5 +40,5 @@ def logout_user(request : HttpRequest):
 
     logout(request)
 
-    return redirect("url_main:index_page")
+    return redirect("url_main:home")
 
