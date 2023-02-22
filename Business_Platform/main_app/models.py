@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 class Section(models.Model):
     section_name = models.CharField(max_length=30)
     
+    
+    def __str__(self) -> str:
+        return f"{self.section_name}"
 
 class Projects(models.Model):
     
@@ -13,10 +16,8 @@ class Projects(models.Model):
     section = models.ForeignKey(Section, on_delete= models.CASCADE)
     projects_name = models.CharField(max_length=500)
     description = models.TextField()
-    rating =  models.FloatField()
     created_at  = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="images/", default="images/default.jpg")
-
     
     def __str__(self) -> str:
         return f"{self.projects_name}"
@@ -27,5 +28,8 @@ class Comments(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    
 
+    def __str__(self) -> str:
+        return f"{self.user}"
 

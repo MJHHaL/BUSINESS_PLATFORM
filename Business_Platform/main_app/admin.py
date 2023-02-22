@@ -1,6 +1,7 @@
-# from django.contrib import admin
-# from .models import 
+from django.contrib import admin
+from .models import Projects ,Section,Comments
 
 
-# admin.site.register()
-# admin.site.register()
+admin.site.register(Projects)
+admin.site.register(Comments)
+admin.site.register(Section)
