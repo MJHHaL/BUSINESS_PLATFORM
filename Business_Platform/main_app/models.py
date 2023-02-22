@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 
 
 
+
+
 class Section(models.Model):
     section_name = models.CharField(max_length=30)
     

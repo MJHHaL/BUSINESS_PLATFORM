@@ -6,16 +6,20 @@ from django.contrib.auth import authenticate, login, logout
 # Create your views here.
 def register_user(request : HttpRequest):
 
+    
+        # if User.objects.filter(User.username == request.POST["username"]).first():
+        #     msg = "xxxx"
     if request.method == "POST":
+        
         User.objects.create_user(
             username=request.POST["username"], 
             email=request.POST["email"],
             password=request.POST["password"],
             first_name = request.POST["first_name"],
-            last_name = request.POST["last_name"]       
+            last_name = request.POST["last_name"] ,     
         ).save()
-        return redirect("accounts:login_user")
-    return render(request, "accounts/register.html")
+        return redirect("url_accounts:login_user")
+    return render(request, "accounts/register.html" )
 
 
 def login_user(request : HttpRequest):
@@ -30,7 +34,7 @@ def login_user(request : HttpRequest):
         if user is not None:
             #login user
             login(request, user)
-            return redirect("url_main:home")
+            return redirect("url_main:profile")
         else:
             loggin_msg = "Please Use correct Credentials"
     return render(request, "accounts/login.html", {"msg" : loggin_msg})
