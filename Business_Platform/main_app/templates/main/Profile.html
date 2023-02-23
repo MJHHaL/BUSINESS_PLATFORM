@@ -5,42 +5,30 @@
 
 
 {% block content %}
-
 <div class="container">
-     
     {% if request.user.is_staff %}
-    <ul class="list-group  ">
-        <li class="list-group-item row"> 
-            <a class="col" href="{% url 'url_main:add_projects' %}" type="button">Add project</a>
-            <a class="col" href="{% url 'url_main:add_projects' %}" type="button">Add project</a>
-            <a class="col" href="{% url 'url_main:add_projects' %}" type="button">Add project</a>
-        </li>
-      </ul>
-      {% endif %}
-</div>
+<ul class="list-group  ">
+    <li class="list-group-item row"> 
+        <a class="col-1 btn btn-lg " style="font-size: small; color: rgb(38, 38, 155);" href="{% url 'url_main:add_projects' %}" type="button">Add project</a>
+        <a class="col-2 btn btn-lg" style="font-size: small; color: blue;" href="{% url 'url_main:orders_received' %}" type="button">orders received</a>
+        <a class="col-1 btn btn-lg" style="font-size: small; color: blue;"  href="{% url 'url_main:add_projects' %}" type="button">My Favorites</a>
+    </li>
+  </ul>
+  {% endif %}
+  
+  </div>
 <div class="container-fluid">
-    
-    <div class="container">
-        <h1>{{ request.user.first_name  }} {{ request.user.last_name }}</h1>
-    
-        <h2>User Info</h2>
-        <h5>Email: {{ request.user.email }}</h5>
-        <h5>Birth date:{{ request.user.age }}</h5>
-        
-    
-    </div>
-
-
 
       <div class="row p-3">
         
         <div class="col-12 text-center" >
             <div class="p-4 shadow " style="overflow: hidden;">
-                <a href="" class="text-decoration-none"><h4 class="mt-4">{{request.user.username}}</h4></a>
+                <a href="" class="text-decoration-none"><h4 class="mt-4">{{info.user.username}}</h4></a>
                 <img src="{{user.image.url }}" class="w-50" style="width: 200px;" />
-                <h6><i class="bi bi-star-fill"></i> {{ request.user.email }}</h6>
-                <h6><i class="bi bi-star-fill"></i>{{ request.user.age }}</h6> 
-                <i class="fa fa-text-height" aria-hidden="true">{{request.user.bio}}</i>
+                <h6><i class="bi bi-star-fill"></i> {{ info.user.email }}</h6>
+                <h6><i class="bi bi-star-fill"></i>{{ info.headline }}</h6> 
+                <h6><i class="bi bi-star-fill"></i>{{ info.phone }}</h6> 
+                <i class="" aria-hidden="true">{{info.bio}}</i>
             </div>
         </div>
        
@@ -58,6 +46,7 @@
             </div>
         </div>
         {% endfor %}
+        
       </div>
 
 

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Profiel {{ request.user.first_name }} {% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+    <h1>{{ request.user.first_name  }} {{ request.user.last_name }}</h1>
+
+    <h2>User Info</h2>
+    <h5>Email: {{ request.user.email }}</h5>
+    <h5>Birth date:{{ request.user.profile.birth_date }}</h5>
+    <h5>Gender: {{ request.user.profile.gender }}</h5>
+    <h5>Gender: {{ request.user.profile.age }}</h5>
+
+</div>
+
+
+{% endblock %}

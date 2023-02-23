@@ -18,7 +18,8 @@ class Profile(models.Model):
     website = models.CharField(max_length=100)
     bio = models.TextField(max_length=1000)
     
-    
+    def __str__(self) -> str:
+        return f"{self.user }"
     
 def create_profile(sender,**kwargs):
     

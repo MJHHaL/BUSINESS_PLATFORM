@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from .models import Projects , Comments , Section 
 from accounts.models import Profile
+from customers.models import Orders
 from django.contrib.auth.models import User
+
 
 # Create your views here.
 
@@ -11,10 +13,19 @@ def index(request : HttpRequest):
     projects = Projects.objects.all()
     return render(request , "main/index.html", {"projects" : projects})
 
-def profile(request : HttpRequest):
-    projects = Projects.objects.all()
-    users = User.objects.all()
-    return render(request , "main/profile.html", {"projects" : projects , "users" : users})
+
+
+def profile(request : HttpRequest , user_id ):
+    
+    info = Profile.objects.get(user = user_id)
+    projects = Projects.objects.filter(user = user_id)
+    context = {
+        "projects" : projects,
+        "info" : info
+        
+        }
+    
+    return render(request , "main/profile.html",context)
 
 #to add a new entry
 def add_projects(request : HttpRequest):
@@ -110,3 +121,20 @@ def user_info(request : HttpRequest):
             ).save() 
         return redirect("url_main:home")
     return render(request, "main/user_info.html" )
+
+def profile_user(request : HttpRequest):
+
+    return render( request, "main/profile.html")
+
+
+
+def orders_received(request : HttpRequest):
+    orders = Orders.objects.all()
+  
+    return render(request , "main/orders_received.html", {"orders" : orders})
+
+
+
+def display_order(request : HttpRequest ):
+    orders = Orders.objects.all()
+    return render(request , "main/order_manage.html", {"orders" : orders})

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Add a New Project {% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+<h2>Add a New Project</h2>
+
+<form action="" method="POST" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <div class="mt-3">
+      <label class="form-label">Order</label>
+      <input type="text" name="order_name" class="form-control" />
+    </div>
+
+    
+    <div class="mt-3">
+      <label class="form-label">Content</label>
+      <textarea class="form-control" name="content"></textarea>
+    </div>
+
+      <input type="submit" class="btn btn-primary" value="New order" />
+</form>
+
+</div>
+
+
+
+{% endblock %}
