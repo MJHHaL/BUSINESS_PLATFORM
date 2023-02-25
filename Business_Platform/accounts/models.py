@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+from customers.models import Orders
 # Create your models here.
 
 
@@ -27,3 +28,14 @@ def create_profile(sender,**kwargs):
         user_profile = Profile.objects.create(user = kwargs['instance'])
         
 post_save.connect( create_profile , sender = User)
+
+
+
+
+class Customers(models.Model):
+     customer_user = models.OneToOneField(User, on_delete=models.CASCADE , primary_key=True)
+     
+class Provider(models.Model):
+     provider_user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+     

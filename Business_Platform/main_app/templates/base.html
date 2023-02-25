@@ -24,12 +24,18 @@
                 <a class="nav-link active" aria-current="page" href="{% url 'url_main:home' %}">Business</a>
               </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'url_customers:new_orders' %}">Order</a>
-              </li>
+            -->
              
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'url_main:profile' request.user.id  %}">Profile</a>
+                <a class="nav-link" href="{% url 'url_main:profile' request.user.id  %}">Dashboard</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'url_accounts:user_info' %}">Add user info</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'url_accounts:update_user_info' request.user.id %}">Update user info</a>
               </li>
              
             </ul>
@@ -49,7 +55,21 @@
           </div>
         </div>
       </nav>
-     
+      <div class="container" >
+       
+
+        {% if perms.main_app.view_projects %}
+    <ul class="list-group" >
+        <li class="list-group-item row" style="padding-left: 300px;"> 
+            <a class="col-2 btn btn-outline-primary " style="font-size: small; " href="{% url 'url_main:add_projects' %}" type="button">Add project</a>
+            <a class="col-2 btn btn-outline-primary" style="font-size: small; " href="{% url 'url_main:orders_received' request.user.id %}" type="button">orders received</a>
+            <a class="col-2 btn btn-outline-primary" style="font-size: small;" href="" type="button">Progress Status</a>
+            <a class="col-2 btn btn-outline-primary" style="font-size: small;"  href="{% url 'url_main:add_projects' %}" type="button">My Favorites</a>
+        </li>
+      </ul>
+      {% endif %}
+      
+      </div>
 
       {% block content %}
 

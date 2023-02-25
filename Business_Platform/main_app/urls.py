@@ -14,7 +14,7 @@ urlpatterns = [
     path("project/details/<project_id>" , views.project_details , name = "project_details"),
     path("project/delete/<project_id>" , views.delete_project , name = "delete_project"),
     path("project/Comment/<project_id>" , views.add_Comments , name = "add_comments"),
-    path("project/profile/add/info" , views.user_info , name = "user_info"),
+    # path("project/profile/add/info" , views.user_info , name = "user_info"),
     path("profiles/user/", views.profile_user, name="profile_user"),
-    path("project/orders/", views.orders_received, name="orders_received"),
+    path("project/orders/<user_id>", views.orders_received, name="orders_received"),
 ]

@@ -5,30 +5,42 @@
 
 
 {% block content %}
-<div class="container">
-    {% if request.user.is_staff %}
-<ul class="list-group  ">
-    <li class="list-group-item row"> 
-        <a class="col-1 btn btn-lg " style="font-size: small; color: rgb(38, 38, 155);" href="{% url 'url_main:add_projects' %}" type="button">Add project</a>
-        <a class="col-2 btn btn-lg" style="font-size: small; color: blue;" href="{% url 'url_main:orders_received' %}" type="button">orders received</a>
-        <a class="col-1 btn btn-lg" style="font-size: small; color: blue;"  href="{% url 'url_main:add_projects' %}" type="button">My Favorites</a>
-    </li>
-  </ul>
-  {% endif %}
-  
-  </div>
+
 <div class="container-fluid">
 
       <div class="row p-3">
         
-        <div class="col-12 text-center" >
-            <div class="p-4 shadow " style="overflow: hidden;">
-                <a href="" class="text-decoration-none"><h4 class="mt-4">{{info.user.username}}</h4></a>
-                <img src="{{user.image.url }}" class="w-50" style="width: 200px;" />
-                <h6><i class="bi bi-star-fill"></i> {{ info.user.email }}</h6>
-                <h6><i class="bi bi-star-fill"></i>{{ info.headline }}</h6> 
-                <h6><i class="bi bi-star-fill"></i>{{ info.phone }}</h6> 
-                <i class="" aria-hidden="true">{{info.bio}}</i>
+        <div class="col-12 text-center  " >
+            <div class="p-4 shadow row" >
+
+                <div class="col-4" style="padding-left: 100px;" >
+                    <div class=" card text-bg-primary  mb-3  " style="max-width: 18rem; ">
+                        <div class="card-header">Header</div>
+                        <div class="card-body">
+                          <h5 class="card-title">Success card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div> 
+                </div>
+                
+                <div class="col-4" style="padding-left: 100px;">
+                    <div class=" card text-bg-danger  mb-3 " style="max-width: 18rem;">
+                        <div class="card-header">Header</div>
+                        <div class="card-body">
+                          <h5 class="card-title">Success card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="col-4" style="padding-left: 100px;">
+                    <div class=" card text-bg-warning  mb-3 " style="max-width: 18rem;">
+                        <div class="card-header">Header</div>
+                        <div class="card-body">
+                          <h5 class="card-title">Success card title</h5>
+                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div> 
             </div>
         </div>
        

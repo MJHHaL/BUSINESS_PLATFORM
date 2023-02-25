@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from customers.models import Orders
 
 
 
@@ -35,3 +36,15 @@ class Comments(models.Model):
     def __str__(self) -> str:
         return f"{self.user}"
 
+
+# class Backlog(models.Model):
+    
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     order_name = models.CharField(max_length=100)
+#     content = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)
+    
+
+#     def __str__(self) -> str:
+#         return f"{self.user}"
+    

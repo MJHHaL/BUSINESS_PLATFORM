@@ -53,7 +53,6 @@ def update_project(request : HttpRequest , project_id):
     if request.method == "POST":
         choice = Section.objects.get(id = request.POST["section"])
         
-        
         project.projects_name = request.POST["projects_name"]
         project.section = choice
         project.description = request.POST["description"]
@@ -103,24 +102,22 @@ def add_Comments(request : HttpRequest, project_id):
 
     return redirect("url_main:project_details", project_id=project_id)
 
-def user_info(request : HttpRequest):
-    
-    
-    if request.method == "POST":
-        # option = Section.objects.get(id = request.POST["section"])
-        Profile(
-            user = request.user,
-            gender = request.POST["gender"], 
-            age = request.POST["age"], 
-            headline = request.POST["headline"], 
-            phone = request.POST["phone"], 
-            email = request.POST["email"], 
-            website = request.POST["website"], 
-            bio = request.POST["bio"], 
-            image = request.FILES["image"]
-            ).save() 
-        return redirect("url_main:home")
-    return render(request, "main/user_info.html" )
+# def user_info(request : HttpRequest): 
+#     if request.method == "POST":
+#         # option = Section.objects.get(id = request.POST["section"])
+#         Profile(
+#             user = request.user,
+#             gender = request.POST["gender"], 
+#             age = request.POST["age"], 
+#             headline = request.POST["headline"], 
+#             phone = request.POST["phone"], 
+#             email = request.POST["email"], 
+#             website = request.POST["website"], 
+#             bio = request.POST["bio"], 
+#             image = request.FILES["image"]
+#             ).save() 
+#         return redirect("url_main:home")
+#     return render(request, "main/user_info.html" )
 
 def profile_user(request : HttpRequest):
 
@@ -128,8 +125,9 @@ def profile_user(request : HttpRequest):
 
 
 
-def orders_received(request : HttpRequest):
-    orders = Orders.objects.all()
+def orders_received(request : HttpRequest , user_id):
+    
+    orders = Orders.objects.filter(user = user_id)
   
     return render(request , "main/orders_received.html", {"orders" : orders})
 
@@ -138,3 +136,5 @@ def orders_received(request : HttpRequest):
 def display_order(request : HttpRequest ):
     orders = Orders.objects.all()
     return render(request , "main/order_manage.html", {"orders" : orders})
+
+

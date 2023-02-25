@@ -8,6 +8,7 @@ class Orders(models.Model):
 
     order_name = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    send_to = models.CharField(max_length=1000 , default=0)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     

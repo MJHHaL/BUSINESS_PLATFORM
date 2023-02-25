@@ -27,7 +27,7 @@
                 <a href="{% url 'url_main:update_project' details_project.id %}" class="btn btn-primary">update</a>
                 <a href="{% url 'url_main:delete_project' details_project.id %}" class="btn btn-danger">delete</a>
                 {%endif%}
-            
+               
             </div>  
         </div>
         <div class="col-8" style="height: auto;">
@@ -35,7 +35,13 @@
                 <h4>{{details_project.user}}</h4> 
                 <img src="{{details_project.image.url }}" class="" style="width: 100px;" />
                 <a href="" class="text-decoration-none"><h4 class="mt-4">{{details_project.user.first_name}}</h4></a>
-                <a class="btn btn-outline-success" href="{% url 'url_customers:new_orders' %}">Hire Me</a>
+                {% if perms.customers.add_orders %}
+        
+                <a class="btn btn-outline-success" href="{% url 'url_customers:new_orders' details_project.user.id %}">Hire Me</a>
+                {% endif %}
+                
+          
+               
                 <h6><i class="bi bi-star-fill"></i> {{details_project.section}}</h6>
                 <h6><i class="bi bi-star-fill"></i> {{ details_project.rating }}</h6>
                 <h6><i class="bi bi-star-fill"></i> {{details_project.description}}</h6>

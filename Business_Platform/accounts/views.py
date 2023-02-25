@@ -1,25 +1,47 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User ,Group
 from django.contrib.auth import authenticate, login, logout
+from .models import Profile , Customers , Provider
 
 # Create your views here.
 def register_user(request : HttpRequest):
-
+    # if User.objects.filter(User.username == request.POST["username"]).first():
+    #     msg = "xxxx"
     
-        # if User.objects.filter(User.username == request.POST["username"]).first():
-        #     msg = "xxxx"
+    msg = None
     if request.method == "POST":
-        
-        User.objects.create_user(
+        user_choice = int(request.POST["type_user"])
+        print("---------------------" , user_choice ," ", type(user_choice))
+        if user_choice == 1:
+            new_user = User.objects.create_user(
             username=request.POST["username"], 
             email=request.POST["email"],
             password=request.POST["password"],
             first_name = request.POST["first_name"],
             last_name = request.POST["last_name"] ,     
-        ).save()
-        return redirect("url_accounts:login_user")
-    return render(request, "accounts/register.html" )
+        )
+            new_user.save()
+            group = Group.objects.get(name='customers')
+            new_user.groups.add(group)
+            return redirect("url_accounts:login_user")
+            
+        elif  user_choice  == 2:
+            new_user = User.objects.create_user(
+            username=request.POST["username"], 
+            email=request.POST["email"],
+            password=request.POST["password"],
+            first_name = request.POST["first_name"],
+            last_name = request.POST["last_name"] ,     
+        )
+            new_user.save()
+            group = Group.objects.get(name='providers')
+            new_user.groups.add(group)
+            return redirect("url_accounts:login_user")    
+        else:
+            msg = "please Choice type user !"
+            
+    return render(request, "accounts/register.html" , {"msg" : msg} )
 
 
 def login_user(request : HttpRequest):
@@ -49,3 +71,41 @@ def logout_user(request : HttpRequest):
 def profile_user(request : HttpRequest):
 
     return render( request, "accounts/profile.html")
+
+
+def user_info(request : HttpRequest): 
+    if request.method == "POST":
+        # option = Section.objects.get(id = request.POST["section"])
+        Profile(
+            user = request.user,
+            gender = request.POST["gender"], 
+            age = request.POST["age"], 
+            headline = request.POST["headline"], 
+            phone = request.POST["phone"], 
+            email = request.POST["email"], 
+            website = request.POST["website"], 
+            bio = request.POST["bio"], 
+            image = request.FILES["image"]
+            ).save() 
+        return redirect("url_main:home")
+    return render(request, "accounts/add_info.html" )
+
+
+def update_user_info(request : HttpRequest , user_id): 
+    
+    user_info = Profile.objects.get(user = user_id)
+    if request.method == "POST":
+        user_info.gender = request.POST["gender"], 
+        user_info.age = request.POST["age"], 
+        user_info.headline = request.POST["headline"], 
+        user_info.phone = request.POST["phone"], 
+        user_info.email = request.POST["email"], 
+        user_info.website = request.POST["website"], 
+        user_info.bio = request.POST["bio"], 
+        user_info.image = request.FILES["image"]
+        user_info.save() 
+        
+        
+        return redirect("url_main:home")
+    return render(request, "accounts/update_info.html" , {"user_info" : user_info} )
+

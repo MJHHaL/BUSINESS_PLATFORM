@@ -1,1 +1,41 @@
     
+
+{% extends 'base.html' %}
+
+{% block title %}   {% endblock %}
+
+
+{% block content %}
+
+
+<div class="container p-4">
+    <div class="table-responsive">
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">User</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">States</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr class="">
+                    <td scope="row">{{ order.user.username }}</td>
+                    <td>{{order.order_name}}</td>
+                    <td>{{order.created_at}}</td>
+                    <td>R1C3</td>
+                </tr>
+               {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+
+{% endblock %}
+   
+   
+
+
