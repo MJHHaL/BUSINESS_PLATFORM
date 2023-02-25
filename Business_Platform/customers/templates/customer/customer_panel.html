@@ -6,28 +6,17 @@
 
 {% block content %}
 <div class="container">
-    {% if request.user.is_staff %}
+    
 <ul class="list-group  ">
     <li class="list-group-item row"> 
-        <a class="col" href="{% url 'url_customers:new_orders' %}" type="button">Add Order</a>
+        <a class="col" href="{% url 'url_customers:new_public_orders' request.user.id %}" type="button">Add Order</a>
        
     </li>
   </ul>
-  {% endif %}
+  
   
   </div>
 <div class="container-fluid">
-    
-    <div class="container">
-        <h1>{{ request.user.first_name  }} {{ request.user.last_name }}</h1>
-    
-        <h2>User Info</h2>
-        <h5>Email: {{ request.user.email }}</h5>
-        <h5>Birth date:{{ request.user.age }}</h5>
-        
-    
-    </div>
-
 
 
       <div class="row p-3">
@@ -44,6 +33,37 @@
        
       </div>
       
+      <div class="container p-4">
+        <div class="table-responsive">
+            
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">User</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">States</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <form action="" method="post">
+                    <tr class="">
+                        <td scope="row">{{ order.user.username }}</td>
+                        <td>{{order.created_at}}</td>
+                        <td>{{order.order_name}}</td>
+                        <td>
+                            <a class="btn btn-outline-primary" href="{% url 'url_customers:update_order'  order.id %}">Update</a>
+                            <a class="btn btn-outline-danger" href="{% url 'url_customers:delete_order'  order.id %}">Delete</a>  
+                        </td>
+                    </tr>
+                   {% endfor %}
+                </form>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
       
 
 

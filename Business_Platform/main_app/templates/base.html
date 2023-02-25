@@ -24,12 +24,17 @@
                 <a class="nav-link active" aria-current="page" href="{% url 'url_main:home' %}">Business</a>
               </li>
 
-            -->
-             
+            
+              {% if perms.main_app.view_projects %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'url_main:profile' request.user.id  %}">Dashboard</a>
               </li>
-
+              {% endif %}
+              {% if perms.customers.view_orders %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'url_customers:order_list' request.user.id %}">Orders</a>
+              </li>
+              {% endif %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'url_accounts:user_info' %}">Add user info</a>
               </li>

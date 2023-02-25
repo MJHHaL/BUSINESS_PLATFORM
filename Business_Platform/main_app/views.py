@@ -15,8 +15,9 @@ def index(request : HttpRequest):
 
 
 
-def profile(request : HttpRequest , user_id ):
-    
+def provider_panel(request : HttpRequest , user_id ):
+    if not request.user.has_perm("main_app.view_projects"):
+       return render(request, "main/no_permission.html")
     info = Profile.objects.get(user = user_id)
     projects = Projects.objects.filter(user = user_id)
     context = {
@@ -25,7 +26,7 @@ def profile(request : HttpRequest , user_id ):
         
         }
     
-    return render(request , "main/profile.html",context)
+    return render(request , "main/provider_panel.html",context)
 
 #to add a new entry
 def add_projects(request : HttpRequest):
@@ -121,7 +122,7 @@ def add_Comments(request : HttpRequest, project_id):
 
 def profile_user(request : HttpRequest):
 
-    return render( request, "main/profile.html")
+    return render( request, "main/provider_panel.html")
 
 
 

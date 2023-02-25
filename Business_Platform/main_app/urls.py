@@ -8,7 +8,7 @@ app_name = "url_main"
 urlpatterns = [
     
     path("" , views.index , name = "home"),
-    path("profile/<user_id>" , views.profile , name = "profile"),
+    path("control_panel/<user_id>" , views.provider_panel , name = "profile"),
     path("project/add/" , views.add_projects , name = "add_projects"),
     path("project/update/<project_id>" , views.update_project , name = "update_project"),
     path("project/details/<project_id>" , views.project_details , name = "project_details"),
