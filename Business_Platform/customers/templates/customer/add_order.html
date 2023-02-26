@@ -14,13 +14,13 @@
             {% csrf_token %}
             <div class="mt-3">
               <label class="form-label">Title of Order</label>
-              <input type="text" name="order_name" class="form-control" />
+              <input  type="text" name="order_name" class="form-control" required/>
             </div>
         
             
             <div class="mt-3">
               <label class="form-label">Order Details</label>
-              <textarea class="form-control" name="content"></textarea>
+              <textarea class="form-control" name="content" required></textarea>
             </div>
         
               <input type="submit" class="btn btn-primary" value="New order" />

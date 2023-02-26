@@ -5,6 +5,19 @@
 
 
 {% block content %}
+<div class="container" >
+  {% if perms.main_app.view_projects %}
+  <ul class="list-group" >
+      <li class="list-group-item row" style="padding-left: 300px;"> 
+          <a class="col-2 btn btn-outline-primary " style="font-size: small; " href="{% url 'url_main:add_projects' %}" type="button">Add project</a>
+          <a class="col-2 btn btn-outline-primary" style="font-size: small; " href="{% url 'url_main:orders_received' request.user.id %}" type="button">orders received</a>
+          <a class="col-2 btn btn-outline-primary" style="font-size: small;" href="" type="button">Progress Status</a>
+          <a class="col-2 btn btn-outline-primary" style="font-size: small;"  href="{% url 'url_main:add_projects' %}" type="button">My Favorites</a>
+      </li>
+    </ul>
+    {% endif %}
+    
+  </div>
 
 <div class="container-fluid">
 

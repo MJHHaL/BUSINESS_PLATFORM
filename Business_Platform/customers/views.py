@@ -26,7 +26,7 @@ def new_orders(request : HttpRequest , user_id):
                 order_name= request.POST["order_name"], 
                 content=request.POST["content"],
                 ).save() 
-        return redirect("url_customers:order_list")
+        return redirect("url_main:home")
     return render(request, "customer/add_order.html")
 
 
@@ -68,4 +68,5 @@ def delete_order(request : HttpRequest  , order_id):
     
     order = Orders.objects.get(id=order_id)
     order.delete()
-    return redirect("url_main:home")
+    # return redirect("url_main:home")
+    return redirect("url_customers:order_list", user_id=request.user.id)

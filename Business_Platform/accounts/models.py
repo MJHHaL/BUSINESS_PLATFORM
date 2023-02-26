@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from customers.models import Orders
 # Create your models here.
 
 
@@ -19,8 +18,8 @@ class Profile(models.Model):
     website = models.CharField(max_length=100)
     bio = models.TextField(max_length=1000)
     
-    def __str__(self) -> str:
-        return f"{self.user }"
+#     def __str__(self) -> str:
+#         return f"{self.user }"
     
 def create_profile(sender,**kwargs):
     
@@ -30,12 +29,8 @@ def create_profile(sender,**kwargs):
 post_save.connect( create_profile , sender = User)
 
 
-
-
-class Customers(models.Model):
-     customer_user = models.OneToOneField(User, on_delete=models.CASCADE , primary_key=True)
      
 class Provider(models.Model):
-     provider_user = models.OneToOneField(User, on_delete=models.CASCADE)
+     provider_user = models.ForeignKey(User, on_delete=models.CASCADE)
     
      

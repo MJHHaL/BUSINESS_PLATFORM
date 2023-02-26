@@ -1,4 +1,4 @@
-
+    
 
 {% extends 'base.html' %}
 
@@ -17,9 +17,10 @@
         </li>
       </ul> 
     </div>
+ 
 
 <div class="row p-3" >
-    {% for project in projects %}
+    {% for project in projects_section %}
   <div class="col-3" >
       <div class="p-4 shadow " style="overflow: hidden;">
           <a href="{% url 'url_main:project_details' project.id  %}" class="text-decoration-none"><h4 class="mt-4">{{project.projects_name}}</h4></a>

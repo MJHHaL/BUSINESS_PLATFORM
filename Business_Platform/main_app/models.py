@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from customers.models import Orders
 
 
 
@@ -19,6 +18,7 @@ class Projects(models.Model):
     section = models.ForeignKey(Section, on_delete= models.CASCADE)
     projects_name = models.CharField(max_length=500)
     description = models.TextField()
+    rating = models.FloatField( default="5")
     created_at  = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="images/", default="images/default.jpg")
     

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.models import User ,Group
 from django.contrib.auth import authenticate, login, logout
-from .models import Profile , Customers , Provider
+from .models import Profile , Provider
 
 # Create your views here.
 def register_user(request : HttpRequest):
@@ -68,10 +68,6 @@ def logout_user(request : HttpRequest):
 
     return redirect("url_main:home")
 
-def profile_user(request : HttpRequest):
-
-    return render( request, "accounts/profile.html")
-
 
 def user_info(request : HttpRequest): 
     if request.method == "POST":
@@ -109,3 +105,6 @@ def update_user_info(request : HttpRequest , user_id):
         return redirect("url_main:home")
     return render(request, "accounts/update_info.html" , {"user_info" : user_info} )
 
+def user_profile(request : HttpRequest , user_id):
+    
+    return render(request, "accounts/profiles.html" , {"user_info" : user_info} )

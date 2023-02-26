@@ -9,10 +9,19 @@ from django.contrib.auth.models import User
 # Create your views here.
 
 
-def index(request : HttpRequest):
+def index(request : HttpRequest ):
+    
+   
     projects = Projects.objects.all()
-    return render(request , "main/index.html", {"projects" : projects})
+    return render(request , "main/index.html", {"projects":projects})
 
+
+def most_comment(request : HttpRequest):
+    most_rate = Projects.objects.all().order_by("-rating")
+    context ={
+        "most_comment" : most_rate,
+    }
+    return render(request , "main/most_comment.html", context)
 
 
 def provider_panel(request : HttpRequest , user_id ):
@@ -139,3 +148,17 @@ def display_order(request : HttpRequest ):
     return render(request , "main/order_manage.html", {"orders" : orders})
 
 
+def delete_comment(request : HttpRequest  , comment_id ):
+
+    comment = Comments.objects.get(id=comment_id)
+    comment.delete()
+    return redirect("url_main:home" )
+    
+    
+def order_by_section(request : HttpRequest  , section_num):
+    
+    projects_by_section = Projects.objects.filter(section = section_num )
+    context = {
+        "projects_section" : projects_by_section ,
+         }
+    return render(request , "main/section.html", context)

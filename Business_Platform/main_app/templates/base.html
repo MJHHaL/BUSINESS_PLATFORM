@@ -27,7 +27,7 @@
             
               {% if perms.main_app.view_projects %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'url_main:profile' request.user.id  %}">Dashboard</a>
+                <a class="nav-link" href="{% url 'url_main:provider_panel' request.user.id  %}">Dashboard</a>
               </li>
               {% endif %}
               {% if perms.customers.view_orders %}
@@ -45,10 +45,8 @@
              
             </ul>
             {% if request.user.is_authenticated %}
-            
-            <div class="text-success"> Welcome : {{request.user.username}}</div>  
-
-            <div class="text-danger m-2"> <a href="{% url 'url_accounts:logout_user' %}"><i class="fas fa-sign-out-alt"></i></a></div> 
+            <div class="text-success"> <a class="nav-link active"  href="{% url 'url_accounts:user_profile' request.user.id %}">{{request.user.username}}</a></div>  
+            <div class="text-danger m-2"> <a  href="{% url 'url_accounts:logout_user' %}"><i class="fas fa-sign-out-alt"></i></a></div> 
             {% else %} 
             <div class="text-danger m-2"> <a href="{% url 'url_accounts:login_user' %}"><i class="fas fa-sign-in-alt"></i></a></div> 
             {% endif %}
@@ -60,22 +58,7 @@
           </div>
         </div>
       </nav>
-      <div class="container" >
-       
-
-        {% if perms.main_app.view_projects %}
-    <ul class="list-group" >
-        <li class="list-group-item row" style="padding-left: 300px;"> 
-            <a class="col-2 btn btn-outline-primary " style="font-size: small; " href="{% url 'url_main:add_projects' %}" type="button">Add project</a>
-            <a class="col-2 btn btn-outline-primary" style="font-size: small; " href="{% url 'url_main:orders_received' request.user.id %}" type="button">orders received</a>
-            <a class="col-2 btn btn-outline-primary" style="font-size: small;" href="" type="button">Progress Status</a>
-            <a class="col-2 btn btn-outline-primary" style="font-size: small;"  href="{% url 'url_main:add_projects' %}" type="button">My Favorites</a>
-        </li>
-      </ul>
-      {% endif %}
-      
-      </div>
-
+   
       {% block content %}
 
 
