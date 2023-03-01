@@ -8,33 +8,111 @@
 {% block content %}
 
 
-<div class="container p-3" style="overflow: hidden;">
+<div class="container p-3">
         
-      
+   
     
        <div class="row">
-        <div class="col-3">
-            <div class="p-4 shadow " >
+        <div id="carouselExampleIndicators" class="carousel slide" style="background-color: rgb(249, 249, 249);">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="{{details_project.image.url }}" style="padding: 50px;" class="d-block w-100" alt="" >
+                </div>
+                
+                <div class="carousel-item">
+                  <img src="{{details_project.image.url }}" style="padding: 50px;" class="d-block w-100" alt="" >
+                </div>
+                
+                <div class="carousel-item">
+                  <img src="{{details_project.image.url }}" style="padding: 50px;" class="d-block w-100" alt="" >
+                </div>
+              </div>
+              
+              
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
                
-                <h4>{{details_project.user}}</h4> 
-                <img src="{{details_project.image.url }}"  style="width: 100px;" />
-                <a href="" class="text-decoration-none"><h4 class="mt-4">{{details_project.projects_name}}</h4></a>
-                <h6>Release on:   {{details_project.created_at}}</h6>
-                <h6><i class="bi bi-star-fill"></i> {{details_project.section}}</h6>
-                <h6><i class="bi bi-star-fill"></i> {{ details_project.rating }}</h6>
-                <h6><i class="bi bi-star-fill"></i> {{details_project.description}}</h6>
-                {% if request.user.is_staff %}
-                <a href="{% url 'url_main:update_project' details_project.id %}" class="btn btn-primary">update</a>
-                <a href="{% url 'url_main:delete_project' details_project.id %}" class="btn btn-danger">delete</a>
-                {%endif%}
+            </div>
+            <div>
+                {% if request.user == details_project.user %}
+                <a href="{% url 'url_main:update_project' details_project.id %}" class="btn btn-outline-primary col-1">update</a>
+                <a href="{% url 'url_main:delete_project' details_project.id %}" class="btn btn-outline-danger col-1">delete</a>
+                 {%endif%}
+                
+            </div>
+        <div class="col-12 p-2" >
+            <section class="" >
+                  <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col">
+                      <div class="card " style="border-radius: 15px; ">
+                        <div class="card-body p-4 text-black">
+                          <div>
+                            <p><h4 class="mb-4 fw-bold ">{{details_project.projects_name}}</h4></p>
+                            <div class="d-flex align-items-center justify-content-between mb-1">
+                                
+                                <p class="my-4 pb-1">{{details_project.description}}
+                                </p>
+                            </div>
+                          </div>
+                          <div class="d-flex align-items-center mb-4">
+                            <div class="flex-shrink-0">
+                              <img src="{{img.image.url}}"
+                                alt="avatar" class="img-fluid rounded-circle border border-dark border-3"
+                                style="width: 100px;">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                              <div class="d-flex flex-row align-items-center mb-2  ">
+                                <p class="mb-0 me-2 " ><a  class="btn btn-lg" href="{% url 'url_accounts:user_info' details_project.user.id %}" >@{{details_project.user}}</a> </p>
+                               
+                              </div>
+                              <div>
+                                <button type="button" class="btn btn-outline-dark btn-rounded btn-sm"
+                                  data-mdb-ripple-color="dark">{{details_project.section}}</button>
+                                  {% if request.user.is_authenticated %}
+                                  {% if request.user in details_project.like.all %}
+                                 <a href="{% url 'url_main:like'  details_project.id %}" class="btn btn-sm btn-outline-dark col-1"><i class="fas fa-thumbs-up"></i></a>
+                                 {% else %}
+                                 <a href="{% url 'url_main:like' details_project.id %}" class="btn btn-sm btn-outline-primary col-1"><i class="far fa-thumbs-up"></i></a>
+                                 {%endif%}
+                                 {%endif%}
+                                <div ></div>
+                              </div>
+                            </div>
+                          </div>
+                          <hr>
+                         
+                         
+                          
+                          {% if perms.customers.add_orders %}
+            
+                          <a class="btn btn btn-outline-success btn-rounded btn-block btn-lg " href="{% url 'url_customers:new_orders' details_project.user.id %}">Send Order</a>  
+          
+                          
+                          {% endif %}
+                            
+                        </div>
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            <!-- <div class="p-4 shadow  " >
+                <img src="{{img.image.url }}" alt="avatar"class="rounded-circle img-fluid" style="width: 150px;">
+                <h4><a class="" href="{% url 'url_accounts:user_info' details_project.user.id %}">{{details_project.user}}</a></h4> 
                
-            </div>  
-        </div>
-        <div class="col-8" style="height: auto;">
-            <div class="p-4 shadow  " >
-                <h4>{{details_project.user}}</h4> 
-                <img src="{{details_project.image.url }}" class="" style="width: 100px;" />
-                <a href="" class="text-decoration-none"><h4 class="mt-4">{{details_project.user.first_name}}</h4></a>
                 {% if perms.customers.add_orders %}
         
                 <a class="btn btn-outline-success" href="{% url 'url_customers:new_orders' details_project.user.id %}">Hire Me</a>
@@ -44,15 +122,12 @@
                
                 <h6><i class="bi bi-star-fill"></i> {{details_project.section}}</h6>
                 <h6><i class="bi bi-star-fill"></i> {{ details_project.rating }}</h6>
-                <h6><i class="bi bi-star-fill"></i> {{details_project.description}}</h6>
-                {% if request.user.is_staff %}
-                <a href="{% url 'url_main:update_project' details_project.id %}" class="btn btn-primary">update</a>
-                <a href="{% url 'url_main:delete_project' details_project.id %}" class="btn btn-danger">delete</a>
-                {%endif%}
+                <h6><i class="bi bi-star-fill"></i> </h6>
+               
             
-            </div>  
+            </div>   -->
         </div>
-       </div>
+       
 
 
 
@@ -61,11 +136,21 @@
             {% if request.user.is_authenticated %}
             <div class="mt-1">
                 <div>
-                    <form action="{% url  'url_main:add_comments' details_project.id %}" method="post">
+                    <form action="{% url  'url_main:add_comments' details_project.id %}" method="get">
                         {% csrf_token %} 
                         
 
                         <textarea name="content" class="form-control mt-3" placeholder="Your Comment here..."></textarea>
+                        
+                        <select name="rating" value="{{details_project.rating}}" class="form-select">
+                            <option value="">--Rating--</option>
+                            <option value="1" {% if details_project.rating == 1 %} selected {% endif %}>1</option>
+                            <option value="2" {% if details_project.rating == 2 %} selected {% endif %}>2</option>
+                            <option value="3" {% if details_project.rating == 3 %} selected {% endif %}>3</option>
+                            <option value="4" {% if details_project.rating == 4 %} selected {% endif %}>4</option>
+                            <option value="5" {% if details_project.rating == 5 %} selected {% endif %}>5</option>
+                          </select>
+                        
         
         
                         <input class="btn btn-primary mt-2" type="submit" value="Add Review" />
@@ -86,16 +171,19 @@
         </div>
     </div>
 
-    <div  class=" col-6 p " >
+    <div  class=" col-12 " >
         <h5>Comment :</h5>
         {% for comment in comments  %}
             <div class="p-2 border mt-2"  style="background-color: rgb(224, 224, 224);">
 
-                <h6 style="color: brown;">{{ comment.user.username }}</h6>
-                <!-- <h6>{{ comment.rating }} Stars</h6> -->
+                
+                <p><a style="color: brown;"  class="btn btn-lg" href="{% url 'url_accounts:user_info' details_project.user.id %}" >{{comment.user}}</a> </p>
+                <hr>
+                <p>Rating : {{comment.rating }}</p>
                 <p>{{ comment.content }}</p>
-                <a href="{% url 'url_main:delete_comment' comment.id   %}" class="btn btn-outline-danger" ><i  class="fas fa-trash"></i></a>
-
+                {% if  request.user == comment.user %}
+                <a href="{% url 'url_main:delete_comment' comment.id details_project.user.id  %}" class="btn btn-outline-danger" ><i  class="fas fa-trash"></i></a>
+                {% endif %}
             </div>
         {% endfor %}
     </div>

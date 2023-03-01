@@ -6,26 +6,33 @@
 
 
 {% block content %}
-
+{% include 'base2.html' %}
 
 <div class="container p-4">
-    <div class="table-responsive">
+    <div class="table-responsive text-center"  style="border: 1px;">
         
         <table class="table table-primary">
             <thead>
                 <tr>
-                    <th scope="col">User</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">States</th>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Saute</th>
                 </tr>
             </thead>
             <tbody>
+                
                 {% for order in orders %}
                 <form action="" method="post">
                 <tr class="">
-                    <td scope="row">{{ order.user.username }}</td>
-                    <td>{{order.order_name}}</td>
-                    <td>{{order.created_at}}</td>
+                    <td scope="row">{{ order.customer_user }}</td>
+                    <td>{{order.provider_user}}</td>
+                    <td>{{order.order_title}}</td>
+                    <td>in  progress</td>
+                    <td>{{order.to_provider}}</td>
+                    <td>
+                        <a href="{% url 'url_main:orders_completed' order.id %}" style="size: 5px;" class="btn btn-outline-primary">Done</a>
+                    </td>
                     <td></td>
                 </tr>
                {% endfor %}

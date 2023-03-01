@@ -5,19 +5,7 @@
 
 
 {% block content %}
-<div class="container" >
-  {% if perms.main_app.view_projects %}
-  <ul class="list-group" >
-      <li class="list-group-item row" style="padding-left: 300px;"> 
-          <a class="col-2 btn btn-outline-primary " style="font-size: small; " href="{% url 'url_main:add_projects' %}" type="button">Add project</a>
-          <a class="col-2 btn btn-outline-primary" style="font-size: small; " href="{% url 'url_main:orders_received' request.user.id %}" type="button">orders received</a>
-          <a class="col-2 btn btn-outline-primary" style="font-size: small;" href="" type="button">Progress Status</a>
-          <a class="col-2 btn btn-outline-primary" style="font-size: small;"  href="{% url 'url_main:add_projects' %}" type="button">My Favorites</a>
-      </li>
-    </ul>
-    {% endif %}
-    
-  </div>
+{% include 'base2.html' %}
 
 <div class="container-fluid">
 
@@ -27,32 +15,31 @@
             <div class="p-4 shadow row" >
 
                 <div class="col-4" style="padding-left: 100px;" >
-                    <div class=" card text-bg-primary  mb-3  " style="max-width: 18rem; ">
-                        <div class="card-header">Header</div>
+                    <div class=" card text-bg-danger  mb-3  " style="max-width: 18rem; ">
+                        <div class="card-header">Orders</div>
                         <div class="card-body">
-                          <h5 class="card-title">Success card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <h5 class="card-title">Orders Received</h5>
+                          <h2>{{count_orders}}</h2>
                         </div>
                     </div> 
                 </div>
                 
                 <div class="col-4" style="padding-left: 100px;">
-                    <div class=" card text-bg-danger  mb-3 " style="max-width: 18rem;">
-                        <div class="card-header">Header</div>
+                    <div class=" card text-bg-warning  mb-3 " style="max-width: 18rem;">
+                        <div class="card-header">Orders Accepted</div>
                         <div class="card-body">
-                          <h5 class="card-title">Success card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                          <h5 class="card-title">Count Orders Received</h5>
                         </div>
+                        <h2>{{count_orders_accepted}}</h2>
                     </div> 
                 </div>
 
                 <div class="col-4" style="padding-left: 100px;">
-                    <div class=" card text-bg-warning  mb-3 " style="max-width: 18rem;">
+                    <div class=" card   mb-3 " style="max-width: 18rem; background-color: green; color: white;">
                         <div class="card-header">Header</div>
                         <div class="card-body">
                           <h5 class="card-title">Success card title</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
+                          <h2>{{ count_orders_complected }}</h2>
                     </div> 
             </div>
         </div>
@@ -67,7 +54,9 @@
                 <img src="{{project.image.url }}" class="w-50" style="width: 200px;" />
                 <h6><i class="bi bi-star-fill"></i> {{project.section}}</h6>
                 <h6><i class="bi bi-star-fill"></i> {{ project.rating }}</h6> 
-                <h6><i class="bi bi-star-fill"></i> {{project.description}}</h6>
+                <div style="overflow: hidden;">
+                  <h6><i class="bi bi-star-fill"></i> {{project.description}}</h6>
+                </div>
             </div>
         </div>
         {% endfor %}

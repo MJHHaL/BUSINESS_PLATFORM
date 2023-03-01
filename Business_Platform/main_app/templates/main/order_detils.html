@@ -1,0 +1,54 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}   {% endblock %}
+
+
+{% block content %}
+
+
+<div class="container p-3">
+        
+   
+
+    <section class="vh-100" style="background-color: #5f59f7;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+              <div class="card mb-5" style="border-radius: 15px;">
+                <div class="card-body p-4">
+                  <h3 class="mb-3">{{order_details.order_name}}</h3>
+                  <p class="small mb-0"><i class="fas fa-info-circle"></i> <span class="mx-2">|</span> 
+                    <strong>{{order_details.content}}</strong> 
+                    <span class="ms-3 me-4">|</span> {{order_details.created_at}}</p>
+                  <hr class="my-4">
+                  <div class="d-flex justify-content-start align-items-center">
+                    
+                    <p class="mb-0 me-2 " ><a  class="btn btn-lg" href="{% url 'url_accounts:user_info' order_user.user.id %}" >@{{order_user.user}}</a> </p>
+
+                    </a>
+                   </span>
+                    <a href="{% url 'url_accounts:user_info' order_user.user.id %}">
+                      <img src=" {{order_user.image.url }}" alt="avatar"
+                        class="img-fluid rounded-circle me-3" width="35">
+                    </a>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+   
+
+
+</div>
+
+{% endblock %}
+   
+   
+
+

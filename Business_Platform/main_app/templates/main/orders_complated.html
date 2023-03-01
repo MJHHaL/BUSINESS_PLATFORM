@@ -1,0 +1,46 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}   {% endblock %}
+
+
+{% block content %}
+{% include 'base2.html' %}
+
+<div class="container p-4">
+    <div class="table-responsive text-center"  style="border: 1px;">
+        
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">From</th>
+                    <th scope="col">To</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Saute</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for order in orders %}
+                <form action="" method="post">
+                <tr class="">
+                    <td scope="row">{{ order.customer_user }}</td>
+                    <td>{{order.provider_user}}</td>
+                    <td>{{order.order_title}}</td>
+                    <td>in  progress</td>
+                    <td>{{order.to_provider}}</td>
+                </tr>
+               {% endfor %}
+            </form>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+{% endblock %}
+   
+   
+
+

@@ -1,0 +1,103 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}   {% endblock %}
+
+
+{% block content %}
+
+
+<div class="container p-3">
+        
+   
+
+    <section class="vh-100" style="background-color: #5f59f7;">
+        <div class="container py-5 ">
+          
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col col-xl-10">
+              <div class="card mb-5" style="border-radius: 15px;">
+                <div class="card-body p-4">
+                  <h3 class="mb-3">{{orders.order_name}}</h3>
+                  <p class="small mb-0"><i class="fas fa-info-circle"></i> <span class="mx-2">|</span> 
+                    <strong>{{orders.content}}</strong> 
+                    <span class="ms-3 me-4">|</span> {{orders.created_at}}</p>
+                  <hr class="my-4">
+                  <div class="d-flex justify-content-start align-items-center">
+                    
+                    <p class="mb-0 me-2 " ><a  class="btn btn-lg" href="{% url 'url_accounts:user_info' orders.user.id %}" >{{orders.user}}</a> </p>
+
+                    </a>
+                   </span>
+                    <a href="{% url 'url_accounts:user_info' orders.user.id %}">
+                      <img src=" {{order_user.image.url }}" alt="avatar"
+                        class="img-fluid rounded-circle me-3" width="35">
+                    </a>
+                    
+                  </div>
+                </div>
+                
+              </div>
+              <div  class=" col-12 " >
+    
+                {% for comment in comments  %}
+                    <div class="p-2 border mt-2"  style="background-color: white    ">
+        
+                        
+                        <p><a style="color: brown;"  class="btn btn-lg" href="{% url 'url_accounts:user_info' orders.user.id %}" >{{comment.user}}</a> </p>
+                        <hr>
+                    
+                        <p>{{ comment.content }}</p>
+                        {% if  request.user == comment.user %}
+                        <a href="{% url 'url_customers:delete_order_comment' comment.id orders.id  %}" class="btn btn-outline-danger" ><i  class="fas fa-trash"></i></a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+            </div>
+            
+          </div>
+          
+        </div>
+        
+      </section>
+
+      
+      <div class="col-6">
+        <div class="  ">
+            {% if request.user.is_authenticated %}
+            <div class="mt-1">
+                <div>
+                    <form action="{% url  'url_customers:add_public_comments' orders.id %}" method="POST">
+                        {% csrf_token %} 
+                        
+
+                        <textarea name="content" class="form-control mt-3" placeholder="Your Comment here..."></textarea>
+                        
+                       
+                        
+        
+        
+                        <input class="btn btn-primary mt-2" type="submit" value="Add Review" />
+        
+                    </form>
+                </div>
+            </div>
+        
+        
+            {% endif %}
+            <hr />
+
+        </div>
+    </div>
+   
+
+
+</div>
+
+{% endblock %}
+   
+   
+
+

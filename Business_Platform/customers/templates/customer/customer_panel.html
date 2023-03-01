@@ -8,12 +8,11 @@
 <div class="container">
     
 <ul class="list-group  ">
-    <li class="list-group-item row"> 
+    <!-- <li class="list-group-item row"> 
         <a class="col" href="{% url 'url_customers:new_public_orders' request.user.id %}" type="button">Add Order</a>
        
-    </li>
+    </li> -->
   </ul>
-  
   
   </div>
 <div class="container-fluid">
@@ -21,7 +20,7 @@
 
       <div class="row p-3">
         
-        <div class="col-12 text-center" >
+        <div class="col-12 text-center " >
             <div class="p-4 shadow " style="overflow: hidden;">
                 <a href="" class="text-decoration-none"><h4 class="mt-4">{{request.user.username}}</h4></a>
                 <img src="{{user.image.url }}" class="w-50" style="width: 200px;" />
@@ -33,15 +32,16 @@
        
       </div>
       
-      <div class="container p-4">
+      <div class="container p-4 text-center ">
         <div class="table-responsive">
-            
-            <table class="table">
+            <h2>Order Sent</h2>
+            <table class="table table-danger">
                 <thead>
                     <tr>
                         <th scope="col">User</th>
                         <th scope="col">Date</th>
                         <th scope="col">States</th>
+                        <th scope="col">To</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -52,8 +52,8 @@
                         <td scope="row">{{ order.user.username }}</td>
                         <td>{{order.created_at}}</td>
                         <td>{{order.order_name}}</td>
+                        <td>{{order.to_provider}}</td>
                         <td>
-                            <a class="btn btn-outline-primary" href="{% url 'url_customers:update_order'  order.id %}">Update</a>
                             <a class="btn btn-outline-danger" href="{% url 'url_customers:delete_order'  order.id %}">Delete</a>  
                         </td>
                     </tr>
@@ -62,7 +62,33 @@
                 </tbody>
             </table>
         </div>
-        
+        <div class="container p-4 text-center shadow">
+            <div class="table-responsive">
+                <h2>Order Accepted</h2>
+                <table class="table table-primary">
+                    <thead>
+                        <tr>
+                            <th scope="col">From</th>
+                            <th scope="col">To</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Saute</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in order_accepted %}
+                        
+                        <tr class="">
+                            <td scope="row">{{ x.customer_user }}</td>
+                            <td>{{x.provider_user}}</td>
+                            <td>{{x.order_title}}</td>
+                            <td>in  progress</td>
+                           
+                       {% endfor %}
+                    
+                    </tbody>
+                </table>
+            </div>
     </div>
       
 

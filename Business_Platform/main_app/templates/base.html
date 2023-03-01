@@ -7,12 +7,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"crossorigin="anonymous" />
 
     <title>Document</title>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-secondary">
+    <nav class="navbar navbar-expand-lg navbar bg- " >
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Business</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,20 +33,21 @@
               {% endif %}
               {% if perms.customers.view_orders %}
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'url_customers:order_list' request.user.id %}">Orders</a>
+                <a class="nav-link" href="{% url 'url_customers:order_list' request.user.id %}">My Orders</a>
               </li>
               {% endif %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'url_accounts:user_info' %}">Add user info</a>
-              </li>
 
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'url_accounts:update_user_info' request.user.id %}">Update user info</a>
-              </li>
-             
+             {% if request.user.is_authenticated %}
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'url_customers:orders_public' %}">Orders</a>
+            </li>
+             <li class="nav-item">
+              <a class="nav-link" href="{% url 'url_main:projects_liked' request.user.id %}">My Favorite</a>
+            </li>
+             {% endif %} 
             </ul>
             {% if request.user.is_authenticated %}
-            <div class="text-success"> <a class="nav-link active"  href="{% url 'url_accounts:user_profile' request.user.id %}">{{request.user.username}}</a></div>  
+            <div class="text-success"> <a class="nav-link active"  href="{% url 'url_accounts:user_profile' request.user.id %}">{{request.user.username}} </a></div>  
             <div class="text-danger m-2"> <a  href="{% url 'url_accounts:logout_user' %}"><i class="fas fa-sign-out-alt"></i></a></div> 
             {% else %} 
             <div class="text-danger m-2"> <a href="{% url 'url_accounts:login_user' %}"><i class="fas fa-sign-in-alt"></i></a></div> 
@@ -69,14 +71,7 @@
         <div class="container p-4 pb-0">
           <!-- Section: Social media -->
           <section class="mb-4">
-            <!-- Facebook -->
-            <a
-              class="btn text-white btn-floating m-1"
-              style="background-color: #3b5998;"
-              href="#!"
-              role="button"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
+            
       
             <!-- Twitter -->
             <a
@@ -87,32 +82,11 @@
               ><i class="fab fa-twitter"></i
             ></a>
       
-            <!-- Google -->
-            <a
-              class="btn text-white btn-floating m-1"
-              style="background-color: #dd4b39;"
-              href="#!"
-              role="button"
-              ><i class="fab fa-google"></i
-            ></a>
+            
       
-            <!-- Instagram -->
-            <a
-              class="btn text-white btn-floating m-1"
-              style="background-color: #ac2bac;"
-              href="#!"
-              role="button"
-              ><i class="fab fa-instagram"></i
-            ></a>
+           
       
-            <!-- Linkedin -->
-            <a
-              class="btn text-white btn-floating m-1"
-              style="background-color: #0082ca;"
-              href="#!"
-              role="button"
-              ><i class="fab fa-linkedin-in"></i
-            ></a>
+            
             <!-- Github -->
             <a
               class="btn text-white btn-floating m-1"
@@ -128,8 +102,8 @@
       
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-          © 2020 Copyright:
-          <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+          © 2023 Copyright:
+          <a class="text-white" href="">MJHHaL</a>
         </div>
         <!-- Copyright -->
       </footer>

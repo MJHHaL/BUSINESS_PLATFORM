@@ -1,0 +1,55 @@
+
+
+{% extends 'base.html' %}
+
+{% block title %}   {% endblock %}
+
+
+{% block content %}
+{% include 'base2.html' %}
+
+<div class="container p-4">
+    <ul class="list-group  ">
+        <li class="list-group-item "> 
+            <a class=" btn  btn-lg btn-outline-dark" href="{% url 'url_customers:new_public_orders' request.user.id %}" type="button">Send Order</a>
+           
+        </li>
+      </ul>
+    <div class="table-responsive text-center"  style="border: 1px;">
+        
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">From</th>
+                    
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            
+            <tbody style="font-size: small;">
+                
+                {% for order in orders %}
+                {% if not order.to_provider %}
+                     <tr class="">
+                        <td scope="row">
+                            <p ><a class="btn btn-sm btn-lg" href="{% url 'url_accounts:user_info' order.user.id %}" >{{ order.user }}</a> </p>
+                        </td>
+
+                        <td><a class="btn btn-sm btn-lg" href="{% url 'url_customers:order_public_details' order.id %}"> {{order.order_name}}</a></td>
+                        <td>{{order.content}}</td>
+                    </tr>
+                {% endif %}
+               {% endfor %}
+            </form>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+{% endblock %}
+   
+   
+
+

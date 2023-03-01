@@ -7,31 +7,47 @@
 
 {% block content %}
 
-
+<div class="container" >
+    {% include 'base2.html' %}
+      
+    </div>
 <div class="container p-4">
-    <div class="table-responsive">
+
+   
+    <div class="table-responsive text-center"  style="border: 1px;">
         
         <table class="table table-primary">
             <thead>
                 <tr>
-                    <th scope="col">User</th>
+                    <th scope="col">From</th>
                     <th scope="col">Date</th>
                     <th scope="col">States</th>
+                    <th scope="col">To</th>
+                    <th scope="col">ِAction</th>
                 </tr>
             </thead>
             <tbody>
+                
                 {% for order in orders %}
                 <form action="" method="post">
                 <tr class="">
                     <td scope="row">{{ order.user.username }}</td>
-                    <td>{{order.order_name}}</td>
                     <td>{{order.created_at}}</td>
+                    <td><a href="{% url 'url_main:order_details' order.id %}"> {{order.order_name}} </a></td>
+                    <td>{{order.to_provider}}</td>
+                    <td>
+                        <a href="{% url 'url_main:orders_accepted' order.id %}"e style="size: 5px;" class="btn btn-outline-primary">Accept</a>
+                        
+                    </td>
                     <td></td>
                 </tr>
                {% endfor %}
             </form>
             </tbody>
         </table>
+        {% if msg %}
+       <h1> <div style="color: green;">{{msg}}</div> </h1>
+        {% endif%}
     </div>
     
 </div>
